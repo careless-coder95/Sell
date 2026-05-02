@@ -24,16 +24,16 @@ async def cb_start_love(client: Client, callback: CallbackQuery):
     acc_count = count_accounts(uid)
 
     if acc_count == 0:
-        await callback.answer("❌ Pehle koi account add karo!", show_alert=True)
+        await callback.answer("🚫 First add an account!", show_alert=True)
         return
 
     clear_state(uid)
     set_state(uid, "awaiting_love_reason")
 
     await callback.message.edit_text(
-        "<blockquote>❤️ <u>𝗦𝗧𝗔𝗥𝗧 𝗟𝗢𝗩𝗘</u></blockquote>\n\n"
-        "<blockquote><b>➤ Love ka reason kya hai?</b>\n"
-        "<b>Examples: <code>Propose</code>, <code>Hate</code>, <code>Marry</code></b></blockquote>\n\n"
+        "<blockquote>❤️ <u>𝗦𝗧𝗔𝗥𝗧 𝗟𝗢𝗩𝗘</u></blockquote>\n"
+        "<blockquote><b>➤ what is the reason for love?</b>\n"
+        "<b>Examples:</b> <code>Spam</code>, <code>Fake Account</code>, <code>Voilance</code>, <code>Child Abuse</code>, <code>Pornography</code>, <code>Other</code>\n"
         "<b>❌ Cancel: /cancel</b>",
         parse_mode=ParseMode.HTML,
         reply_markup=kb_back_main()
@@ -58,7 +58,7 @@ async def handle_love_flow(client: Client, message: Message):
         await message.reply(
             f"<blockquote>✅ <b>Reason accepted: <code>{text}</code></b></blockquote>\n\n"
             "<blockquote>❤️ <u>𝗛𝗢𝗪 𝗠𝗔𝗡𝗬 𝗧𝗜𝗠𝗘𝗦?</u></blockquote>\n\n"
-            "<blockquote><b>➤ Ek number enter karo (jaise: <code>6</code>)</b></blockquote>\n\n"
+            "<blockquote><b>➤ Enter a number (jaise: <code>6</code>)</b></blockquote>\n\n"
             "<b>❌ Cancel: /cancel</b>",
             parse_mode=ParseMode.HTML
         )
@@ -67,7 +67,7 @@ async def handle_love_flow(client: Client, message: Message):
     elif step == "awaiting_love_count":
         if not text.isdigit() or int(text) <= 0:
             await message.reply(
-                "<b>⚠️ Sirf positive number enter karo. Jaise: <code>5</code></b>",
+                "<b>⚠️ Just enter the positive number. Like: <code>5</code></b>",
                 parse_mode=ParseMode.HTML
             )
             return
